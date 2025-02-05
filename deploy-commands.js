@@ -5,13 +5,23 @@ const path = require('node:path');
 
 const commands = [];
 //Obtain all files from command directory
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const foldersPath = path.join(__dirname, 'commands')
+const commandFolders = fs.readdirSync(foldersPath).filter(folder =>
+    !folder.startsWith('.'));
 
 //Attain the output of SlashCommandBuilder#toJSON() of every command's data for deployment
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    commands.push(command.data.toJSON());
+for (const folder of commandFolders) {
+    const commandsPath = path.join(foldersPath, folder);
+    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+    for (const file of commandFiles) {
+        const command = require(`${foldersPath}/${folder}/${file}`);
+        if ('data' in command && 'execute' in command) {
+            commands.push(command.data.toJSON());
+        } else {
+            console.log('Read [WARNINGS]')
+        }
+    }
 }
 
 //Build and prepare instance of module REST
@@ -25,7 +35,7 @@ const rest = new REST({ version: 10 }).setToken(token);
 
         //Method PUT used to fully update all commabnds in the server with the current set
         const data = await rest.put(
-            Routes.applicationCommands(clientId),
+            Routes.applicationGuildCommands(clientId, guildId),
             { body: commands },
         );
         console.log(`Nyx has updated ${data.length} commands of the app successfully (/).`)
