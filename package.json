@@ -13,7 +13,8 @@
     "@napi-rs/canvas": "^0.1.65",
     "canvas": "^3.1.0",
     "discord.js": "^14.17.3",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "firebase": "^8.3.1"
   },
   "devDependencies": {
     "eslint": "^9.19.0"
