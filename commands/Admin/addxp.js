@@ -1,6 +1,6 @@
-const { SlashCommandBuilder, EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
-const { addData, setData, getData } = require('../utils/database/DatabaseManager.js');
-const getColorCode = require('../utils/getColorCode');
+const { SlashCommandBuilder, EmbedBuilder, ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
+const { addData, setData, getData } = require('../../utils/database/DatabaseManager.js');
+const getColorCode = require('../../utils/getColorCode');
 module.exports = {
 	name: 'addxp',
 	description: 'Add xp to someone`s intelligence agency',
@@ -10,7 +10,6 @@ module.exports = {
         {
             name: 'country',
             description: 'The country´s leader role.',
-            value: 'country-role',
             required: true,
             type: ApplicationCommandOptionType.Role,
         },
@@ -18,7 +17,6 @@ module.exports = {
         {
             name: 'reason',
             description: 'Reason for the XP gain.',
-            value: 'xp-reason',
             required: true,
             type: ApplicationCommandOptionType.String,
             choices: [
@@ -31,33 +29,32 @@ module.exports = {
                 { name: 'Missing Raw XP', value: 'raw-xp', },
             ],
         },
-        {
-            name: 'missing-raw-xp',
-            description: 'Raw XP value that might have been missing from previous use.',
-            value: 'raw-xp-value',
-            required: false,
-            type: ApplicationCommandOptionType.Integer,
-            min_value: 0,
-        },
         
         {
             name: 'year',
             description: 'Year when the operation was conducted',
-            value: 'year',
             required: true,
             type: ApplicationCommandOptionType.Integer,
             min_value: 1,
+        },
+
+        {
+            name: 'missing-raw-xp',
+            description: 'Raw XP value that might have been missing from previous use.',
+            required: false,
+            type: ApplicationCommandOptionType.Integer,
+            min_value: 0,
         },
     ],
 
     callback: async (client, interaction) => {
 		const { user, member, message, channel } = interaction;
-        const country = interaction.options.getRole('country-role');
-        const opResult = interaction.options.getString('xp-reason');
+        const country = interaction.options.getRole('country');
+        const opResult = interaction.options.getString('reason');
         const year = interaction.options.getInteger('year');
 
-        const countryMaxXP = await getData(country, 'intelagencyxpneed', 1);
-        const xpMissingRaw = interaction.options.getInteger('raw-xp-value');
+        const countryMaxXP = await getData(country.id, 'intelagencyxpneed', 1);
+        const xpMissingRaw = interaction.options.getInteger('missing-raw-xp');
 
         var xpTotal;
         var remainingXP;
@@ -99,13 +96,13 @@ module.exports = {
         }
         
         if (xpMissingRaw < 1 && opResult == 'raw-xp') {
-            await interaction.reply('You selected the reason `Missing Raw XP` but did not add a value the option `missing-raw-xp`, please try again.');
+            await interaction.editReply('You selected the reason `Missing Raw XP` but did not add a value the option `missing-raw-xp`, please try again.');
 
         } else if (xpMissingRaw >= 1 && opResult != 'raw-xp') {
-            await interaction.reply('You added a value to the `missing-raw-xp` option but did not select the `Missing Raw XP` option, please try again.');
+            await interaction.editReply('You added a value to the `missing-raw-xp` option but did not select the `Missing Raw XP` option, please try again.');
         } else {
             await addData(country.id, 'intelagencyxp', xpTotal);
-            await interaction.reply(`You have successfully added ${xpTotal} to <@${country.id}>'s intelligence agency!`)
+            await interaction.editReply(`You have successfully added ${xpTotal}xp to ${country}'s intelligence agency! Reason: ${opResult}`)
         }
 	}
 };
