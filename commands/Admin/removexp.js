@@ -40,7 +40,7 @@ module.exports = {
         
         
         await addData(country.id, 'intelagencyxp', -xpToRemove);
-        await interaction.editReply(`You have successfully removed ${xpToRemove} to ${country}'s intelligence agency!`)
+        await interaction.editReply(`You have successfully removed ${xpToRemove}xp to ${country}'s intelligence agency!`)
         
 	}
 };
