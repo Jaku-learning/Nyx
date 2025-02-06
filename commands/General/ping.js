@@ -3,7 +3,7 @@
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
-		.setDescription('Check the bot´s ping / latency!'),
+		.setDescription('Check the botï¿½s ping / latency!'),
 	async execute(client, interaction) {
 
 		await interaction.deferReply({ ephemeral: false });
@@ -20,7 +20,7 @@ module.exports = {
 
 module.exports = {
 	name: 'ping',
-	description: 'Check the bot´s ping / latency!',
+	description: 'Check the bot`s ping / latency!',
 	server: true,
 	devOnly: true,
 	callback: async (client, interaction) => {
