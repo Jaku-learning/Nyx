@@ -1,7 +1,7 @@
-const { devs, server } = require('../../config.json');
+require('dotenv').config();
 const getLocalCommands = require('../../utils/getLocalCommands');
+
 module.exports = async (client, interaction) => {
-   
     if (interaction.isChatInputCommand()) {
         const localCommands = getLocalCommands();
 
@@ -13,6 +13,7 @@ module.exports = async (client, interaction) => {
             if (!commandObject) return;
 
             if (commandObject.devOnly) {
+                const devs = process.env.DEVELOPERS.split(',');
                 if (!devs.includes(interaction.member.id)) {
                     interaction.reply(`You can't use that command retard!`);
                     return;
@@ -20,7 +21,7 @@ module.exports = async (client, interaction) => {
             }
 
             if (commandObject.serverOnly) {
-                if (!(interaction.guild.id === server)) {
+                if (interaction.guild.id !== process.env.SERVER_ID) {
                     interaction.reply(`You can't use that command in this server donkey!`);
                     return;
                 }
@@ -36,11 +37,10 @@ module.exports = async (client, interaction) => {
             }
             await commandObject.callback(client, interaction);
         } catch (error) {
-            console.log(`There was an error running this command: ${error} at line ${error.line}`)
+            console.log(`There was an error running this command: ${error} at line ${error.line}`);
             console.trace(error);
         }
-    } else
-        if (interaction.isButton()) {
+    } else if (interaction.isButton()) {
         return;
     } else if (!interaction.isStringSelectMenu()) {
         return;

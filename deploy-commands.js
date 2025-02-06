@@ -1,5 +1,5 @@
+require('dotenv').config();
 const { REST, Routes } = require('discord.js');
-const { clientId, guildId, token } = require('./config.json');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -25,7 +25,7 @@ for (const folder of commandFolders) {
 }
 
 //Build and prepare instance of module REST
-const rest = new REST({ version: 10 }).setToken(token);
+const rest = new REST({ version: 10 }).setToken(process.env.TOKEN);
 
 //Deploy commands
 
@@ -35,7 +35,7 @@ const rest = new REST({ version: 10 }).setToken(token);
 
         //Method PUT used to fully update all commabnds in the server with the current set
         const data = await rest.put(
-            Routes.applicationGuildCommands(clientId, guildId),
+            Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.SERVER_ID),
             { body: commands },
         );
         console.log(`Nyx has updated ${data.length} commands of the app successfully (/).`)
