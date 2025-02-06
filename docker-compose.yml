@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  backend:
+    image: "comugamers/nyx-bot"
+    restart: 'unless-stopped'
+    pull_policy: build
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+      - 8.8.8.8
+      - 8.8.4.4
+    environment:
+      - TOKEN
+    build:
+      context: "."
