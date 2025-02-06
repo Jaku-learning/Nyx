@@ -13,9 +13,9 @@ module.exports = async (client, interaction) => {
             if (!commandObject) return;
 
             if (commandObject.devOnly) {
-                const devs = process.env.DEVELOPERS.split(',');
+                const devs = process.env.DEVELOPERS;
                 if (!devs.includes(interaction.member.id)) {
-                    interaction.reply(`You can't use that command retard!`);
+                    interaction.reply(`You can't use that command!`);
                     return;
                 }
             }
