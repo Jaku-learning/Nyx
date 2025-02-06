@@ -13,7 +13,8 @@ module.exports = async (client, interaction) => {
             if (!commandObject) return;
 
             if (commandObject.devOnly) {
-                const devs = process.env.DEVELOPERS;
+                // solución trucha que se joda el .env xdddddddd
+                const devs = ["592844020716273665", "1159977353661919363"];
                 if (!devs.includes(interaction.member.id)) {
                     interaction.reply(`You can't use that command!`);
                     return;
