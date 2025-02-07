@@ -1,12 +1,13 @@
 const fs = require('fs');
 const firebase = require('firebase');
+const databasePath = "./utils/database/database.json";
 
-if (!fs.existsSync('./database.json')) {
+if (!fs.existsSync(databasePath)) {
   console.error('Where the fuck is database.json');
   process.exit(1);
 }
 
-const firebaseConfig = JSON.parse(fs.readFileSync('./database.json', 'utf-8'));
+const firebaseConfig = JSON.parse(fs.readFileSync(databasePath, 'utf-8'));
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
