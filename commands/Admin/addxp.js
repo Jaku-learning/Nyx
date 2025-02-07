@@ -92,7 +92,7 @@ module.exports = {
         if (xpTotal > countryMaxXP) {
             remainingXP = xpTotal - countryMaxXP;
             channel.send(`Adding this amount of XP leaves ${remainingXP}xp as leftovers, since the required XP to level up is less than the XP that was gained, you will have to add this missing amount yourself, copy and paste the command below:`);
-            channel.send(`/addxp country:${country} reason:Missing Raw XP missing-raw-xp:${remainingXP} year:${year}`);
+            channel.send(`/addxp country:${country} reason:Missing Raw XP year:${year} missing-raw-xp:${remainingXP}`);
         }
         
         if (xpMissingRaw < 1 && opResult == 'raw-xp') {
