@@ -5,6 +5,8 @@ module.exports = async (member) => {
         .filter(role => role.color !== 0)
         .sort((a, b) => b.position - a.position) 
         .first(); 
-
+    
+    /*const roleId = `${colorRole.id}`;*/
+    
     return colorRole || null; 
 }

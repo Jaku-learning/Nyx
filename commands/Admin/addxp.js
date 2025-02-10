@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
 const { addData, setData, getData } = require('../../utils/database/DatabaseManager.js');
-const getColorCode = require('../../utils/getColorCode');
+
 module.exports = {
 	name: 'addxp',
 	description: 'Add xp to someone`s intelligence agency',

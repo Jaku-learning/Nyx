@@ -43,7 +43,7 @@ module.exports = {
 			.setDescription(`Hi! Welcome to Nyx's' user aid menu, please select a category from the dropdown menu to view our commands by category. If you face any issues whilst using them or have feedback for the staff, let us know with a comment or by opening a support ticket in the <#1283125076102742036> channel, thank you!`)
 			.setImage('https://cdn.discordapp.com/attachments/1186041030739492885/1284333631644635269/Bannerastralis.png?ex=679d80e7&is=679c2f67&hm=94c63410cb35d3d9da921c334eb0795f63e5551a3357e3e8ac1fafcb84fd05e2&')
 			.setThumbnail(`${user.displayAvatarURL()}`)
-			.setFooter({ text: 'Nyx version 0.2a' })
+			.setFooter({ text: 'Nyx version 0.3a' })
 			.setTimestamp()
 
 		const row = new ActionRowBuilder()

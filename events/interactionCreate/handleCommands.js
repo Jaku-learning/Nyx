@@ -42,9 +42,7 @@ module.exports = async (client, interaction) => {
             console.trace(error);
         }
     } else if (interaction.isButton()) {
-        return;
-    } else if (!interaction.isStringSelectMenu()) {
-        return;
+        console.log(interaction.values);
     } else if (interaction.isStringSelectMenu()) {
         console.log(interaction.values);
 
@@ -54,5 +52,7 @@ module.exports = async (client, interaction) => {
                 choices += `${value}`;
             });
         }
+    } else {
+        return;
     }
 };

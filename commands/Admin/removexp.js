@@ -30,7 +30,6 @@ module.exports = {
         const countryMaxXP = await getData(country.id, 'intelagencyxpneed', 1);
 
         const xpToRemove = interaction.options.getInteger('removed-xp');
-        var remainingXP;
 
         await interaction.deferReply({ ephemeral: false });
 

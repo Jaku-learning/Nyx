@@ -53,8 +53,8 @@ module.exports = {
 
 		const attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'femboy-image.png' });
 
-		await interaction.deferReply({ ephemeral: true });
-		channel.send({
+		await interaction.deferReply({ ephemeral: false });
+		await interaction.editReply({
 			content: `<@${femboyAvatar.id}> is a cute femboy :3`, files: [attachment]
 		});
 	}
