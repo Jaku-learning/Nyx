@@ -8,6 +8,10 @@ module.exports = async (client) => {
 		const localCommands = getLocalCommands();
 		const applicationCommands = await getApplicationCommands(client, process.env.SERVER_ID);
 
+		for (const command of applicationCommands.cache.values()) {
+			await applicationCommands.delete(command.id);
+		}
+
 		for (const localCommand of localCommands) {
 			const { name, description, options } = localCommand;
 
