@@ -81,12 +81,6 @@ module.exports = {
               });
             await setData(targetCountry.id, 'enemynetworks', finalEnemyNetworks);
         });
-             
-
-              
-        
-        	
-
 
 		await interaction.editReply(`Network in ${targetCountry} successfully removed!`);
         

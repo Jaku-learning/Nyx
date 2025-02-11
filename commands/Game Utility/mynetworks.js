@@ -11,14 +11,25 @@ module.exports = {
 		const { user, member, message, channel } = interaction;
 
 		const attackerCountry = await getColorCode(member);
-		var existingNetworks = await getData(attackerCountry.id, 'friendlynetworks', [])
-		var agencyLevel = await getData(attackerCountry.id, 'intelagencylevel', 1)
+		var existingNetworks = [`${await getData(attackerCountry.id, 'friendlynetworks', [])}`]
+		var agencyLevel = await getData(attackerCountry.id, 'intelagencylevel', 1);
 		
+		//var friendlyNetworks = Array.isArray(existingNetworks) ? existingNetworks : [];
 		//var val = existingNetworks.trim();
 		
+		
+		//existingNetworks.forEach(network => console.log(network.location));
+		//var existingNetworks = val ? existingNetworks.split(",") : [];
 		console.log(existingNetworks)
-		//var friendlyNetworks = val ? existingNetworks.split(",") : [];
+		//console.log(friendlyNetworks)
+		var networks = [];
 
+		/*for (var i = 0; i < Object.keys(existingNetworks).length; i++) {
+			var id = existingNetworks[i]['id'];
+			let obj = { date: id.date || "Unknown", location: id.location || "Unknown" };
+			networks.push(obj);
+			console.log(obj);
+		}*/
 
 
 		/*var friendlyNetworks = [ {
@@ -27,12 +38,26 @@ module.exports = {
 		}]
 
 		console.log(friendlyNetworks)*/
-		var networks = [];
+
+		/*var networks = [];
 			for (const network of existingNetworks) {
-				let obj = { date: network.date, location: network.location };
+				let obj = { date: network.date || "Unknown", location: network.location || "Unknown" };
 				networks.push(obj);
 				console.log(obj);
-			}
+		}*/
+		
+		/*existingNetworks.map(network => (
+			`${console.log(network.location)}`
+		));*/
+
+		var fNetworks = [];
+		//var indexZero = existingNetworks.indexOf(0);
+
+		for (const network of existingNetworks) {
+			//if (indexZero > -1) { fNetworks.splice(indexZero, 1); }
+				fNetworks.push({ date: network.date, location: network.location });
+				console.log(fNetworks);
+        }
 			
 		var networkCap = 1;
 
@@ -54,8 +79,8 @@ module.exports = {
 			.setThumbnail('https://pbs.twimg.com/media/FNp7AC7XEAE41zT.png:large');
 		if (existingNetworks != null) {
 			networksEmbed.addFields(
-				networks.map(network => ({
-					name: `Network Slot ${networks.indexOf(network) + 1}`, value:
+				fNetworks.map((network) => (console.log(network.location), {
+					name: `Network Slot TEST ${fNetworks.indexOf(network) + 1}`, value:
 						`Location: <@&${network.location}>
 						Network Active Since: ${network.date}
 			` })));			
@@ -69,8 +94,6 @@ module.exports = {
 		} else {
 			networksEmbed.addFields({ name: `Empty Network Slot`, value: `No Active Network!` });
 		}
-		
-		
 		await interaction.deferReply({ ephemeral: false });
 		await interaction.editReply({ embeds: [networksEmbed] })
 	}

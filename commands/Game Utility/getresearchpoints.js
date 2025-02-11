@@ -69,7 +69,7 @@ module.exports = {
 				"Superpower": 12
 			};
 
-			const multiplier = powerMultipliers[pow] || 0; //If it doesnt have a valid value, set to zero
+			var multiplier = powerMultipliers[pow] || 0; //If it doesnt have a valid value, set to zero
 
 			if (lit < 9) {
 				return multiplier = 0;
