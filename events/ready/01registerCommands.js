@@ -1,5 +1,5 @@
 require('dotenv').config();
-const areCommandsDifferent = require('../../utils/areCommandsDifferent');
+
 const getApplicationCommands = require('../../utils/getApplicationCommands');
 const getLocalCommands = require('../../utils/getLocalCommands');
 
