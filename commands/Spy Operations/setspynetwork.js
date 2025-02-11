@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
 const { addData, setData, getData } = require('../../utils/database/DatabaseManager.js');
-const getColorCode = require('../../utils/getColorCode');
+const getColorCode = require('../../utils/getColorCode.js');
 
 module.exports = {
 	name: 'setspynetwork',
