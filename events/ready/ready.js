@@ -8,8 +8,13 @@ module.exports = async (client, interaction) => {
     var currentYear = await getData('server', 'year', 9999);
 
     console.log(`Ready, logged in as ${client.user.tag}`);
+    const time = Date.now();
+    const date = new Date(time);
+    // formatted: vDD.MM.YYYY 
+    const formattedVersion = `${date.getDate().toString().padStart(2, '0')}.` +`${(date.getMonth() + 1).toString().padStart(2, '0')}.` + `${date.getFullYear()}`;
+
     client.user.setActivity({
-        name: 'Being built with love!',
+        name: 'Being built with love!, Version: v'+formattedVersion,
         type: ActivityType.Watching,
         status: PresenceUpdateStatus.DoNotDisturb
     });
