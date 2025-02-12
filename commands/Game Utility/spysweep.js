@@ -83,7 +83,7 @@ module.exports = {
 			Modifiers: | Player Level Buff: +**${playerLevelBuff}** | AI Level Buff: +**${AILevelBuff}**
 			Player: <@${user.id}>`)
 			.setThumbnail('https://pbs.twimg.com/media/FNp7AC7XEAE41zT.png:large');
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ ephemeral: false });
 		await interaction.editReply({
 			content:`
 			# Final Result: ${finalResult} | ${resultMessage}
