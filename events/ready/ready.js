@@ -1,6 +1,6 @@
 const { ActivityType, PresenceUpdateStatus } = require('discord.js');
 const { addData, setData, getData } = require('../../utils/database/DatabaseManager.js');
-const getColorCode = require('../../utils/getColorCode');
+const getColorCode = require('../../utils/getColorCode.js');
 
 module.exports = async (client, interaction) => {
     const { user, member, message, channel } = interaction;
@@ -27,7 +27,7 @@ module.exports = async (client, interaction) => {
         var countries = [];
     
         for (const member of members.values()) {
-            let highestColorRole = getHighestColorRole(member);
+            let highestColorRole = await getColorCode(member);
             if (highestColorRole) {
                 countries.push(highestColorRole.id);
             }
