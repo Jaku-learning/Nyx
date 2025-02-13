@@ -33,7 +33,7 @@ module.exports = async (client, interaction) => {
             }
         }
     
-        console.log(countries);
+        //console.log(countries);
     
         var updatedYear = await getData('server', 'year', 9999);
     

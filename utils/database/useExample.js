@@ -7,7 +7,8 @@ basic stats:
 literacy
 infamy
 instability
-prestigeattrition
+prestige
+attrition
 intelagencylevel
 intelagencyxp
 intelagencyxpneed
